@@ -19,14 +19,7 @@
         
 
         /* Header */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+       
 
         .navbar {
             display: flex;
@@ -66,15 +59,11 @@
 
         /* Main Content */
         main {
-            margin-top: 100px;
-            padding: 2rem 0;
+            margin-top: 0;
+            padding: 0;
         }
 
-        .hero-section {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-        }
+        
 
         .hero-title {
             font-size: 4rem;
@@ -211,15 +200,14 @@
         }
 
         .product-image {
-            width: 100px;
-            height: 100px;
+            
             background-color: #f8f9fa;
             border-radius: 15px;
             margin: 0 auto 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            
             font-size: 12px;
             border: 2px dashed #ddd;
         }
@@ -262,6 +250,68 @@
             height: 3px;
             background-color: #e67e22;
         }
+        .purchase-controls {
+  display: flex;
+  flex-direction: column; /* Tumpuk vertikal */
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Bagian jumlah */
+.quantity-wrapper {
+    justify-self: flex-start;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  
+}
+
+/* Tombol + dan – */
+.qty-btn {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+.qty-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Input jumlah */
+.qty-input {
+    margin-left: auto;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Tombol Beli */
+.btn-buy {
+  background-color:#da9628 ;
+  color: #fff;
+  padding: 0.5rem 1.5reorm;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  width: 100%;
+  height: 2.5rem;
+}
+.btn-buy:hover {
+  background-color: #b07412;
+}
 
         /* Footer */
         .footer {

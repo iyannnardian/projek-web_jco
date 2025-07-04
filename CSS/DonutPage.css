@@ -84,7 +84,7 @@ section {
 
         /* Hero Section */
         .hero {
-            margin-bottom: 600x;
+            margin-bottom: 60px;
             padding: 0;
         }
 
@@ -118,7 +118,7 @@ section {
             line-height: 1.6;
             margin-bottom: 30px;
             color: #000;
-            text-align: center;
+            text-align: left;
         }
 
         /* Coffee Section */
