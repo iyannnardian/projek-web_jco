@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donut 5</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            background-color: #4a90e2;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover {
+            color: #ff6b35;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 30px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Main Content - Home Page */
+        .main-content {
+            display: flex;
+            gap: 30px;
+        }
+
+        .products-section {
+            flex: 2;
+        }
+
+        .title {
+            color: #666;
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 120px;
+            height: 120px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .donut-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .box-image {
+            width: 100%;
+            height: 200px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .note-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .note-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .note-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .quantity-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ddd;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .quantity-display {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: #e55a2e;
+        }
+
+        /* Payment Page Styles */
+        .payment-page {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .payment-title {
+            text-align: center;
+            color: #666;
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+
+        .payment-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .payment-form {
+            flex: 1;
+        }
+
+        .form-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-section h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .payment-summary {
+            flex: 1;
+        }
+
+        .order-summary {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .order-summary h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        .order-item-info {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .order-item-note {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .order-item-price {
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .total-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total-final {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ff6b35;
+        }
+
+        .payment-method {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover {
+            border-color: #ff6b35;
+        }
+
+        .payment-option.selected {
+            border-color: #ff6b35;
+            background-color: #fff5f2;
+        }
+
+        .payment-option h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .payment-option p {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .footer-section {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .footer-info {
+            text-align: left;
+        }
+
+        .footer-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #555;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: #ff6b35;
+        }
+
+        .back-button {
+            background-color: #666;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+
+        .confirm-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .confirm-button:hover {
+            background-color: #e55a2e;
+        }
+
+        @media (max-width: 768px) {
+            .main-content,
+            .payment-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .footer-section {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                justify-content: center;
+            }
+
+            .payment-method {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo" onclick="showPage('home')">
+                <div class="logo-icon">π</div>
+                <div class="logo-text">donut 5</div>
+            </div>
+            <nav class="nav-menu">
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('coffee')">Coffee</a>
+                <a onclick="showPage('donut')">Donut</a>
+                <a onclick="showPage('menu')">Menu</a>
+                <a onclick="showPage('contact')">Contact</a>
+            </nav>
+        </header>
+
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <main class="main-content">
+                <section class="products-section">
+                    <h1 class="title">donut 5</h1>
+                    <div class="products-grid">
+                        <div class="product-card" data-name="ALPUKAT" data-price="15000">
+                            <div class="product-image">
+                                <!-- Gambar ALPUKAT akan diisi di sini -->
+                            </div>
+                            <div class="product-name">ALPUKAT</div>
+                            <div class="product-price">
+                                <span>Jumlah:</span>
+                                <span>Rp 15.000</span>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-name="CRUNCHY CRUNCHY" data-price="17000">
+                            <div class="product-image">
+                                <!-- Gambar CRUNCHY CRUNCHY akan diisi di sini -->
+                            </div>
+                            <div class="product-name">CRUNCHY CRUNCHY</div>
+                            <div class="product-price">
+                                <span>Jumlah:</span>
+                                <span>Rp 17.000</span>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-name="BLACK JACK" data-price="16000">
+                            <div class="product-image">
+                                <!-- Gambar BLACK JACK akan diisi di sini -->
+                            </div>
+                            <div class="product-name">BLACK JACK</div>
+                            <div class="product-price">
+                                <span>Jumlah:</span>
+                                <span>Rp 16.000</span>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-name="BLUE BERRYMORE" data-price="18000">
+                            <div class="product-image">
+                                <!-- Gambar BLUE BERRYMORE akan diisi di sini -->
+                            </div>
+                            <div class="product-name">BLUE BERRYMORE</div>
+                            <div class="product-price">
+                                <span>Jumlah:</span>
+                                <span>Rp 18.000</span>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-name="ALCAPONE" data-price="19000">
+                            <div class="product-image">
+                                <!-- Gambar ALCAPONE akan diisi di sini -->
+                            </div>
+                            <div class="product-name">ALCAPONE</div>
+                            <div class="product-price">
+                                <span>Jumlah:</span>
+                                <span>Rp 19.000</span>
+                            </div>
+                        </div>
+
+                        <div class="product-card" data-name="BERRY SPEARY" data-price="20000">
+                            <div class="product-image">
+                                <!-- Gambar BERRY SPEARY akan diisi di sini -->
+                            </div>
+                            <div class="product-name">BERRY SPEARY</div>
+                            <div class="product-price">
+                                <span>Jumlah:</span>
+                                <span>Rp 20.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="sidebar">
+                    <div class="donut-box">
+                        <div class="box-image">
+                            <!-- Gambar kotak donut akan diisi di sini -->
+                        </div>
+                    </div>
+
+                    <div class="note-section">
+                        <h3 class="note-title">Note Varian</h3>
+                        <textarea id="noteInput" class="note-input" placeholder="Contoh: Donut Coklat"></textarea>
+                        
+                        <div class="quantity-section">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <span class="quantity-display" id="quantity">0</span>
+                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                        
+                        <button class="buy-button" onclick="proceedToPayment()">Beli Sekarang</button>
+                    </div>
+                </aside>
+            </main>
+        </div>
+
+        <!-- PAYMENT PAGE -->
+        <div id="payment" class="page">
+            <div class="payment-page">
+                <button class="back-button" onclick="showPage('home')">← Kembali</button>
+                <h1 class="payment-title">pembayaran</h1>
+                
+                <div class="payment-content">
+                    <div class="payment-form">
+                        <div class="form-section">
+                            <h3>Informasi Pemesanan</h3>
+                            <div class="form-group">
+                                <label for="customerName">Nama Lengkap</label>
+                                <input type="text" id="customerName" placeholder="Masukkan nama lengkap">
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPhone">No. Telepon</label>
+                                <input type="tel" id="customerPhone" placeholder="Masukkan nomor telepon">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Alamat Pengiriman</h3>
+                            <div class="form-group">
+                                <label for="address">Alamat Lengkap</label>
+                                <textarea id="address" placeholder="Masukkan alamat lengkap"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Metode Pembayaran</h3>
+                            <div class="payment-method">
+                                <div class="payment-option selected" onclick="selectPayment('cash')">
+                                    <h4>Cash</h4>
+                                    <p>Bayar di tempat</p>
+                                </div>
+                                <div class="payment-option" onclick="selectPayment('transfer')">
+                                    <h4>Transfer</h4>
+                                    <p>Transfer bank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-summary">
+                        <div class="order-summary">
+                            <h3>Ringkasan Pesanan</h3>
+                            <div id="orderItems">
+                                <!-- Order items akan diisi oleh JavaScript -->
+                            </div>
+                            <div class="total-section">
+                                <div class="total-row">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal">Rp 0</span>
+                                </div>
+                                <div class="total-row">
+                                    <span>Ongkir:</span>
+                                    <span>Rp 5.000</span>
+                                </div>
+                                <div class="total-row total-final">
+                                    <span>Total:</span>
+                                    <span id="finalTotal">Rp 5.000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="confirm-button" onclick="confirmOrder()">BAYAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer-section">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">π</div>
+                <div class="footer-info">
+                    <h4>JOS DONUT & COFFEE</h4>
+                    <p>COFFEE<br>MENU<br>PRODUCT<br>CONTACT</p>
+                </div>
+            </div>
+            <div class="footer-contact">
+                <h4>HUBUNGI KAMI</h4>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">📱</a>
+                    <a href="#" class="social-icon">📧</a>
+                    <a href="#" class="social-icon">🌐</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        let quantity = 0;
+        let selectedProduct = null;
+        let selectedPayment = 'cash';
+
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 0) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+            }
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.closest('.payment-option').classList.add('selected');
+        }
+
+        function proceedToPayment() {
+            if (quantity === 0) {
+                alert('Silakan pilih jumlah donut terlebih dahulu!');
+                return;
+            }
+
+            if (!selectedProduct) {
+                alert('Silakan pilih produk terlebih dahulu!');
+                return;
+            }
+
+            // Generate order summary
+            updateOrderSummary();
+            
+            // Show payment page
+            showPage('payment');
+        }
+
+        function updateOrderSummary() {
+            const orderItems = document.getElementById('orderItems');
+            const subtotalElement = document.getElementById('subtotal');
+            const finalTotalElement = document.getElementById('finalTotal');
+            
+            if (selectedProduct && quantity > 0) {
+                const itemTotal = selectedProduct.price * quantity;
+                const deliveryFee = 5000;
+                const finalTotal = itemTotal + deliveryFee;
+                
+                const noteText = document.getElementById('noteInput').value || 'Tidak ada catatan';
+                
+                orderItems.innerHTML = `
+                    <div class="order-item">
+                        <div class="order-item-info">
+                            <div class="order-item-name">${selectedProduct.name} x${quantity}</div>
+                            <div class="order-item-note">Note: ${noteText}</div>
+                        </div>
+                        <div class="order-item-price">Rp ${itemTotal.toLocaleString('id-ID')}</div>
+                    </div>
+                `;
+                
+                subtotalElement.textContent = `Rp ${itemTotal.toLocaleString('id-ID')}`;
+                finalTotalElement.textContent = `Rp ${finalTotal.toLocaleString('id-ID')}`;
+            }
+        }
+
+        function confirmOrder() {
+            const customerName = document.getElementById('customerName').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('address').value;
+            
+            if (!customerName || !customerPhone || !address) {
+                alert('Silakan lengkapi semua informasi pembayaran!');
+                return;
+            }
+
+            // Simulate order processing
+            alert(`Pesanan berhasil dibuat!\n\nNama: ${customerName}\nTelepon: ${customerPhone}\nAlamat: ${address}\nMetode Pembayaran: ${selectedPayment}\n\nTerima kasih telah berbelanja di Donut 5!`);
+            
+            // Reset form
+            resetOrder();
+            showPage('home');
+        }
+
+        function resetOrder() {
+            quantity = 0;
+            selectedProduct = null;
+            document.getElementById('quantity').textContent = '0';
+            document.getElementById('noteInput').value = '';
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerPhone').value = '';
+            document.getElementById('address').value = '';
+            
+            // Reset payment method
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector('.payment-option').classList.add('selected');
+            selectedPayment = 'cash';
+        }
+
+        // Event listeners untuk interaksi produk
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const productName = this.querySelector('.product-name').textContent;
+                const productPrice = parseInt(this.getAttribute('data-price'));
+                
+                selectedProduct = {
+                    name: productName,
+                    price: productPrice
+                };
+                
+                document.getElementById('noteInput').value = productName;
+                
+                // Visual feedback
+                document.querySelectorAll('.product-card').forEach(c => c.style.border = 'none');
+                this.style.border = '2px solid #ff6b35';
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>

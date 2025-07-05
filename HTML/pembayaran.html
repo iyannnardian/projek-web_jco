@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pembayaran</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="payment-page">
+      <button class="back-button" onclick="window.location.href='index.html'">← Kembali</button>
+      <h1 class="payment-title">pembayaran</h1>
+
+      <div class="payment-content">
+        <div class="payment-form">
+          <!-- Form data pelanggan -->
+          <div class="form-section">
+            <h3>Informasi Pemesanan</h3>
+            <div class="form-group">
+              <label for="customerName">Nama Lengkap</label>
+              <input type="text" id="customerName" />
+            </div>
+            <div class="form-group">
+              <label for="customerPhone">No. Telepon</label>
+              <input type="tel" id="customerPhone" />
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Alamat Pengiriman</h3>
+            <div class="form-group">
+              <label for="address">Alamat</label>
+              <textarea id="address"></textarea>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h3>Metode Pembayaran</h3>
+            <div class="payment-method">
+              <div class="payment-option selected" onclick="selectPayment('cash')">
+                <h4>Cash</h4>
+                <p>Bayar di tempat</p>
+              </div>
+              <div class="payment-option" onclick="selectPayment('transfer')">
+                <h4>Transfer</h4>
+                <p>Transfer bank</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-summary">
+          <div class="order-summary">
+            <h3>Ringkasan Pesanan</h3>
+            <div id="orderItems"></div>
+            <div class="total-section">
+              <div class="total-row">
+                <span>Subtotal:</span>
+                <span id="subtotal">Rp 0</span>
+              </div>
+              <div class="total-row">
+                <span>Ongkir:</span>
+                <span>Rp 5.000</span>
+              </div>
+              <div class="total-row total-final">
+                <span>Total:</span>
+                <span id="finalTotal">Rp 5.000</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="confirm-button" onclick="confirmOrder()">BAYAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
