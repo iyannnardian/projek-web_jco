@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donut 5 - Menu</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo" onclick="window.location.href='index.html'">
+        <div class="logo-icon">π</div>
+        <div class="logo-text">donut 5</div>
+      </div>
+      <nav class="nav-menu">
+        <a href="#">Home</a>
+        <a href="#">Coffee</a>
+        <a href="#">Donut</a>
+        <a href="#">Menu</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <section class="products-section">
+        <h1 class="title">donut 5</h1>
+        <div class="products-grid" id="productGrid">
+          <!-- Produk akan diisi oleh JS -->
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="donut-box">
+          <div class="box-image">[Gambar Kotak]</div>
+        </div>
+        <div class="note-section">
+          <h3 class="note-title">Note Varian</h3>
+          <textarea id="noteInput" class="note-input" placeholder="Contoh: Donut Coklat"></textarea>
+          <div class="quantity-section">
+            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+            <span class="quantity-display" id="quantity">0</span>
+            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+          </div>
+          <button class="buy-button" onclick="proceedToPayment()">Beli Sekarang</button>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="footer-section">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">π</div>
+        <div class="footer-info">
+          <h4>JOS DONUT & COFFEE</h4>
+          <p>COFFEE<br>MENU<br>PRODUCT<br>CONTACT</p>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h4>HUBUNGI KAMI</h4>
+        <div class="social-icons">
+          <a href="#" class="social-icon">📱</a>
+          <a href="#" class="social-icon">📧</a>
+          <a href="#" class="social-icon">🌐</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
