@@ -66,28 +66,16 @@
                         <label for="alamat">Alamat Pengiriman</label>
                         <textarea id="alamat" name="alamat" rows="3" required></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="catatan">Catatan untuk Pesanan (Opsional)</label>
+                        <textarea id="catatan" name="catatan" rows="3" placeholder="Contoh: Donat jangan coklat, atau pisahkan minuman."></textarea>
+                    </div>
+
                 </form>
                 
-                <div class="payment-methods">
-                    <h3>Metode Pembayaran</h3>
-                    <div class="payment-option" onclick="selectPayment('bca')">
-                        <input type="radio" name="payment" value="bca" id="bca">
-                        <div class="payment-icon bca-icon">BCA</div>
-                        <label for="bca">BCA Virtual Account</label>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('gopay')">
-                        <input type="radio" name="payment" value="gopay" id="gopay">
-                        <div class="payment-icon gopay-icon">GO</div>
-                        <label for="gopay">Gopay</label>
-                    </div>
-                    <div class="payment-option" onclick="selectPayment('qris')">
-                        <input type="radio" name="payment" value="qris" id="qris">
-                        <div class="payment-icon qris-icon">QR</div>
-                        <label for="qris">QRIS</label>
-                    </div>
-                </div>
                 
-                <button class="btn-pay" id="pay-button" onclick="processPayment()">BAYAR</button>
+                
+                
             </div>
             
             <div class="payment-summary">
@@ -108,8 +96,29 @@
                         <span class="total-label">Total:</span>
                         <span class="total-amount" id="final-total">Rp 5.000</span>
                     </div>
+                <div class="payment-methods">
+                    <h3>Metode Pembayaran</h3>
+                    <div class="payment-option" onclick="selectPayment('bca')">
+                        <input type="radio" name="payment" value="bca" id="bca">
+                        <div class="payment-icon bca-icon">BCA</div>
+                        <label for="bca">BCA Virtual Account</label>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('gopay')">
+                        <input type="radio" name="payment" value="gopay" id="gopay">
+                        <div class="payment-icon gopay-icon">GO</div>
+                        <label for="gopay">Gopay</label>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment('qris')">
+                        <input type="radio" name="payment" value="qris" id="qris">
+                        <div class="payment-icon qris-icon">QR</div>
+                        <label for="qris">QRIS</label>
+                    </div>
+
+                </div>  
+                <button class="btn-pay" id="pay-button" onclick="processPayment()">BAYAR</button>  
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -276,6 +285,7 @@
                         telepon: formData.get('telepon'),
                         alamat: formData.get('alamat')
                     },
+                    catatan: formData.get('catatan'),
                     items: cart,
                     payment_method: selectedPayment,
                     subtotal: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
