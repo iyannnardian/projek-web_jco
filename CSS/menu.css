@@ -63,7 +63,17 @@
             padding: 0;
         }
 
-        
+        /* Mengubah link agar seperti teks biasa */
+a {
+  color: inherit;       /* Mengambil warna teks dari elemen induk */
+  text-decoration: none; /* Menghapus garis bawah */
+}
+
+/* Opsional: jika ingin sedikit hover effect tanpa garis bawah */
+a:hover {
+  color: #444; /* atau warna yang kamu inginkan saat hover */
+}
+
 
         .hero-title {
             font-size: 4rem;
